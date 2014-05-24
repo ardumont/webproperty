@@ -25,5 +25,6 @@
                      {:port port :join? false})))
 
 ;; For interactive development:
+;; (System/setProperty "bootstrap-webproperty" "/home/tony/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties")
 ;; (.stop server)
 ;; (def server (-main))
