@@ -1,0 +1,29 @@
+(ns webproperty.config
+  "Configuration regarding where the properties file are stored.
+The application is setuped through a property file referenced by default in /tmp/bootstrap-webproperty.properties.
+This bootstrap configuration file can be overriden by a jvm property bootstrap-webproperty.
+`-Dbootstrap-webproperty=/some/path/to/bootstrap/properties/file.`"
+  (:require [clojurewerkz.propertied.properties :as p]
+            [clojure.java.io :as io]))
+
+;; the default filepath to the bootstrap webproperty configuration file
+(def default-webproperty-filepath "/tmp/bootstrap-webproperty.properties")
+
+;; for dev
+;; (System/setProperty "bootstrap-webproperty" "/home/tony/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties")
+
+;; Determine the path to the bootstrap webproperty configuration file
+;; If a jvm property exists referencing it, we use it
+;; otherwise, we default to the value of `default-webproperty-filepath`
+(def bootstrap-webproperty-filepath (if-let [property-filepath (System/getProperty "bootstrap-webproperty")]
+                                      property-filepath
+                                      default-webproperty-filepath))
+
+;; The key referencing the folder that exposes the properties to expose
+(def path-to-properties-folder-key "path.to.properties.folder")
+
+;; Load the bootstrap configuration file from the system
+(def bootstrap-webproperty-config (p/load-from (io/file bootstrap-webproperty-filepath)))
+
+;; Retrieve the folder that exposes the properties files
+(def webproperty-properties-folder (.get bootstrap-webproperty-config path-to-properties-folder-key))
