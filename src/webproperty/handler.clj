@@ -17,6 +17,7 @@
   (GET "/properties/:filename" [filename :as req]
        (->> (format "%s/%s.properties" config/webproperty-properties-folder filename)
             properties/load-properties-file
+            pr-str
             (response "text/plain")))
   (route/resources "/")
   (route/not-found "Not Found"))
