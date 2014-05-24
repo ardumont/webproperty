@@ -1,4 +1,5 @@
 (ns webproperty.handler
+  "Expose the routes of the application."
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.handler :refer [site]]
             [compojure.route :refer [resources not-found]]))
