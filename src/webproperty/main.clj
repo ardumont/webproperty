@@ -4,10 +4,7 @@
             [compojure.handler :as handler]
             [clojure.java.io :as io]
             [ring.middleware.stacktrace :as trace]
-            [ring.middleware.session :as session]
-            [ring.middleware.session.cookie :as cookie]
             [ring.adapter.jetty :as jetty]
-            [ring.middleware.basic-authentication :as basic]
             [environ.core :refer [env]]))
 
 (defn wrap-error-page [handler]
