@@ -10,10 +10,6 @@
             [ring.middleware.basic-authentication :as basic]
             [environ.core :refer [env]]))
 
-(defn- authenticated? [user pass]
-  ;; TODO: heroku config:add REPL_USER=[...] REPL_PASSWORD=[...]
-  (= [user pass] [(env :repl-user false) (env :repl-password false)]))
-
 (defn wrap-error-page [handler]
   (fn [req]
     (try (handler req)
