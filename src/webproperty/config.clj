@@ -6,7 +6,7 @@ This bootstrap configuration file can be overriden by a jvm property bootstrap-w
   (:require [webproperty.properties :refer [load-properties-file]]))
 
 ;; the default filepath to the bootstrap webproperty configuration file
-(def default-webproperty-filepath "/tmp/bootstrap-webproperty.properties")
+(def ^:private default-webproperty-filepath "/tmp/bootstrap-webproperty.properties")
 
 ;; for dev
 ;; (System/setProperty "bootstrap-webproperty" "/home/tony/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties")
@@ -14,15 +14,15 @@ This bootstrap configuration file can be overriden by a jvm property bootstrap-w
 ;; Determine the path to the bootstrap webproperty configuration file
 ;; If a jvm property exists referencing it, we use it
 ;; otherwise, we default to the value of `default-webproperty-filepath`
-(def bootstrap-webproperty-filepath (if-let [property-filepath (System/getProperty "bootstrap-webproperty")]
-                                      property-filepath
-                                      default-webproperty-filepath))
+(def ^:private bootstrap-webproperty-filepath (if-let [property-filepath (System/getProperty "bootstrap-webproperty")]
+                                                property-filepath
+                                                default-webproperty-filepath))
 
 ;; The key referencing the folder that exposes the properties to expose
-(def path-to-properties-folder-key "path.to.properties.folder")
+(def ^:private path-to-properties-folder-key "path.to.properties.folder")
 
 ;; Load the bootstrap configuration file from the system
-(def bootstrap-webproperty-config (load-properties-file bootstrap-webproperty-filepath))
+(def ^:private bootstrap-webproperty-config (load-properties-file bootstrap-webproperty-filepath))
 
 ;; Retrieve the folder that exposes the properties files
 (def webproperty-properties-folder (bootstrap-webproperty-config path-to-properties-folder-key))
