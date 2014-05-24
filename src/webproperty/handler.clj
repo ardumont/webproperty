@@ -1,12 +1,12 @@
 (ns webproperty.handler
-  (:use compojure.core)
-  (:require [compojure.handler :as handler]
-            [compojure.route :as route]))
+  (:require [compojure.core :refer [defroutes GET]]
+            [compojure.handler :refer [site]]
+            [compojure.route :refer [resources not-found]]))
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
-  (route/resources "/")
-  (route/not-found "Not Found"))
+  (GET "/" [] "An API to manipulate properties file.")
+  (resources "/")
+  (not-found "Not Found"))
 
 (def app
-  (handler/site app-routes))
+  (site app-routes))
