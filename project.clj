@@ -3,9 +3,15 @@
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.1.8"]
-                 [clojurewerkz/propertied "1.2.0"]]
+                 [clojurewerkz/propertied "1.2.0"]
+                 [ring/ring-jetty-adapter "1.2.1"]
+                 [ring/ring-devel "1.2.1"]
+                 [ring-basic-authentication "1.0.3"]
+                 [environ "0.4.0"]
+                 [com.cemerick/drawbridge "0.0.6"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler webproperty.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring-mock "0.1.5"]]}})
+                        [ring-mock "0.1.5"]]}}
+  :main webproperty.main)
