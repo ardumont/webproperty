@@ -5,7 +5,8 @@
                  [compojure "1.1.8"]
                  [clojurewerkz/propertied "1.2.0"]
                  [ring/ring-jetty-adapter "1.2.1"]
-                 [ring/ring-devel "1.2.1"]]
+                 [ring/ring-devel "1.2.1"]
+                 [environ "0.4.0"]]
   :plugins [[lein-ring "0.8.10"]]
   :ring {:handler webproperty.handler/app}
   :profiles
