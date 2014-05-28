@@ -10,4 +10,12 @@
        p/load-from
        (into {})))
 
-;; (load-properties-file "/home/tony/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties")
+(defn write-properties-file [filepath m]
+  "Given a map m and a filepath, dump the content of such map as a properties file."
+  (p/store-to m filepath))
+
+(comment
+  (let [filepath (format "%s/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties" (System/getProperty "user.home"))]
+    (->> filepath
+         load-properties-file
+         (write-properties-file filepath))))
