@@ -28,7 +28,7 @@
   (GET "/properties/:filename/:key" [filename key]
        (->> filename
             load-map-from-properties
-            (get key)
+            ((fn [m] (get m key)))
             pr-str
             (response "text/plain")))
   (route/resources "/")
