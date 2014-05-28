@@ -1,6 +1,6 @@
 (ns webproperty.handler
   "Expose the routes of the application."
-  (:require [compojure.core :refer [defroutes GET]]
+  (:require [compojure.core :refer [defroutes GET POST]]
             [compojure.handler :as handler]
             [compojure.route :as route]
             [ring.util.response :as resp]
@@ -20,17 +20,25 @@
 
 (defroutes app-routes
   (GET "/" [] "An API to manipulate properties file.")
+
   (GET "/properties/:filename" [filename]
        (->> filename
             load-map-from-properties
             pr-str
             (response "text/plain")))
+
   (GET "/properties/:filename/:key" [filename key]
        (->> filename
             load-map-from-properties
             ((fn [m] (get m key)))
             pr-str
             (response "text/plain")))
+
+  (POST "/properties/:filename" [filename :as req]
+        (->> req
+             pr-str
+             (response "text/plain")))
+
   (route/resources "/")
   (route/not-found "Not Found"))
 
