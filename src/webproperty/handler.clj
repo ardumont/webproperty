@@ -15,7 +15,7 @@
 (defn- load-map-from-properties [filename]
   "Load properties from the filename."
   (->> filename
-       (format "%s/%s.properties" config/webproperty-properties-folder)
+       (format "%s/%s.properties" (config/webproperty-properties-folder))
        properties/load-properties-file))
 
 (defroutes app-routes
