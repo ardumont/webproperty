@@ -2,7 +2,7 @@
   "Configuration regarding where the properties file are stored.
 The application is setuped through a property file referenced by default in /tmp/bootstrap-webproperty.properties.
 This bootstrap configuration file can be overriden by a jvm property bootstrap-webproperty.
-`-Dbootstrap-webproperty=/some/path/to/bootstrap/properties/file.`"
+`-Dbootstrap.webproperty=/some/path/to/bootstrap/properties/file.`"
   (:require [webproperty.properties :refer [load-properties-file]]
             [environ.core :refer [env]]))
 
