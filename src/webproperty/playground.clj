@@ -25,5 +25,8 @@
 
   (json-get "http://localhost:5000/properties/sample0")
 
-  (-> (json-post "http://localhost:5000/properties/sample0" {:some.key.3 "anything"})
-      :body))
+  (-> (json-post "http://localhost:5000/properties/sample0" {:some.key.3 "anything"
+                                                             :some.key.4 "another thing"})
+      :trace-redirects
+      first
+      json-get))
