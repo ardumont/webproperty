@@ -1,7 +1,7 @@
 (ns webproperty.test.handler-test
-  (:use ring.mock.request
-        webproperty.handler)
-  (:require [midje.sweet :refer :all]
+  (:require [ring.mock.request :refer :all]
+            [webproperty.handler :refer :all]
+            [midje.sweet :refer :all]
             [webproperty.properties :as properties]
             [webproperty.config :as config]))
 
