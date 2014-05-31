@@ -9,7 +9,8 @@
                  [environ                 "0.5.0"]
                  [clj-http                "0.9.2"]
                  [org.clojure/data.json   "0.2.4"]]
-  :plugins [[lein-ring "0.8.10"]]
+  :plugins [[lein-ring "0.8.10"]
+            [lein-midje "3.1.3"]]
   :ring {:handler webproperty.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]

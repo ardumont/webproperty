@@ -1,5 +1,8 @@
 VERSION=0.1.0-SNAPSHOT
 
+tests:
+	lein midje
+
 jar:
 	lein jar
 
