@@ -4,4 +4,4 @@ jdk:
   - openjdk7
   - openjdk6
 script:
-  make tests
+  lein2 midje
