@@ -40,10 +40,10 @@
             (response "application/json")))
 
   (POST "/properties/:filename" [filename :as req]
-        (do
+        (let [filepath (filepath-from-filename (config/webproperty-properties-folder) filename)]
           (->> req
                :form-params
-               (properties/merge-properties-file (filepath-from-filename (config/webproperty-properties-folder) filename)))
+               (properties/merge-properties-file filepath))
           (resp/redirect (format "/properties/%s" filename))))
 
   (route/resources "/")
