@@ -13,13 +13,18 @@
   (-> (resp/response body)
       (resp/content-type content-type)))
 
-(defn- load-map-from-properties [filename]
+(defn filepath-from-filename [rootpath filename]
+  "Compute the full filepath from the given filename."
+  (format "%s/%s.properties" rootpath filename))
+
+(defn load-map-from-properties [rootpath filename]
   "Load properties from the filename."
   (->> filename
-       (format "%s/%s.properties" (config/webproperty-properties-folder))
+       (filepath-from-filename rootpath)
        properties/load-properties-file))
 
 (defn trace [o]
+  "Debug decorator."
   (clojure.pprint/pprint o)
   o)
 
@@ -28,23 +33,25 @@
 
   (GET "/properties/:filename" [filename]
        (->> filename
-            load-map-from-properties
-            pr-str
-            (response "text/plain")))
+            (load-map-from-properties (config/webproperty-properties-folder))
+            json/write-str
+            (response "application/json")))
 
   (GET "/properties/:filename/:key" [filename key]
        (->> filename
-            load-map-from-properties
+            (load-map-from-properties (config/webproperty-properties-folder))
             ((fn [m] (get m key)))
-            pr-str
-            (response "text/plain")))
+            json/write-str
+            (response "application/json")))
 
   (POST "/properties/:filename" [filename :as req]
-        (->> req
-             trace
-             :form-params
-             json/write-str
-             (response "application/json")))
+        (do
+          (->> req
+               trace
+               :form-params
+               trace
+               (properties/merge-properties-file (filepath-from-filename (config/webproperty-properties-folder) filename)))
+          (resp/redirect (format "/properties/%s" filename))))
 
   (route/resources "/")
   (route/not-found "Not Found"))
