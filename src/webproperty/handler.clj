@@ -5,7 +5,8 @@
             [compojure.route :as route]
             [ring.util.response :as resp]
             [webproperty.properties :as properties]
-            [webproperty.config :as config]))
+            [webproperty.config :as config]
+            [clojure.data.json :as json]))
 
 (defn- response [content-type body]
   "Generic get response"
@@ -17,6 +18,10 @@
   (->> filename
        (format "%s/%s.properties" (config/webproperty-properties-folder))
        properties/load-properties-file))
+
+(defn trace [o]
+  (clojure.pprint/pprint o)
+  o)
 
 (defroutes app-routes
   (GET "/" [] "An API to manipulate properties files.")
@@ -36,8 +41,10 @@
 
   (POST "/properties/:filename" [filename :as req]
         (->> req
-             pr-str
-             (response "text/plain")))
+             trace
+             :form-params
+             json/write-str
+             (response "application/json")))
 
   (route/resources "/")
   (route/not-found "Not Found"))

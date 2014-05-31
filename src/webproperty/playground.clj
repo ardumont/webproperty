@@ -7,15 +7,17 @@
   (client/post uri {;;:basic-auth ["user" "pass"]
                     :form-params m
                     ;;:headers {"X-Api-Version" "2"}
-                    :content-type :json
+                    ;; :content-type :json
                     ;; :socket-timeout 1000  ;; in milliseconds
                     ;; :conn-timeout 1000    ;; in milliseconds
-                    :accept :json}))
+                    :accept :json ;; header to accept json
+                    :as :json     ;; coerce into json
+                    }))
 
 (comment
   (json/write-str {:key "value"})
 
   (json/read-str (json/write-str {:key "value"}))
 
-  (:body (json-post "http://localhost:5000/properties/some-name" {:key "value"}))
-  )
+  (-> (json-post "http://localhost:5000/properties/some-name" {:key "value"})
+      :body))
