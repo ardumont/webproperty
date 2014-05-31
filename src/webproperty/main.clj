@@ -24,12 +24,8 @@
                          handler/site)
                      {:port port :join? false})))
 
-;; For interactive development:
-(comment
-  (System/setProperty "bootstrap.webproperty" "/home/tony/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties")
-  (.stop server)
-  (def server (-main))
+(comment ;; For interactive development:
   (do
-   (.stop server)
-   (def server (-main)))
-  )
+    (System/setProperty "bootstrap.webproperty" "/home/tony/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties")
+    (.stop server)
+    (def server (-main))))
