@@ -8,7 +8,7 @@
             [webproperty.config :as config]
             [clojure.data.json :as json]))
 
-(defn- response [content-type body]
+(defn response [content-type body]
   "Generic get response"
   (-> (resp/response body)
       (resp/content-type content-type)))
