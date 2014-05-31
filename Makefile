@@ -1,5 +1,8 @@
 VERSION=0.1.0-SNAPSHOT
 
+pr:
+	hub pull-request -b ardumont:master
+
 tests:
 	lein midje
 
