@@ -23,11 +23,6 @@
        (filepath-from-filename rootpath)
        properties/load-properties-file))
 
-(defn trace [o]
-  "Debug decorator."
-  (clojure.pprint/pprint o)
-  o)
-
 (defroutes app-routes
   (GET "/" [] "An API to manipulate properties files.")
 
@@ -47,9 +42,7 @@
   (POST "/properties/:filename" [filename :as req]
         (do
           (->> req
-               trace
                :form-params
-               trace
                (properties/merge-properties-file (filepath-from-filename (config/webproperty-properties-folder) filename)))
           (resp/redirect (format "/properties/%s" filename))))
 
