@@ -38,5 +38,4 @@
          (write-properties-file filepath)))
 
   (let [filepath (format "%s/repo/perso/webproperty/resources/public/bootstrap-webproperty.properties" (System/getProperty "user.home"))]
-    (merge-properties-file filepath {"some-new-key" "with-value"}))
-  )
+    (merge-properties-file filepath {"some-new-key" "with-value"})))
