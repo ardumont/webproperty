@@ -23,8 +23,8 @@
 
 (defn merge-properties-file [filepath m]
   "Given a filepath and a map, merge the properties from filepath and m into filepath."
-  (->> (load-properties-file filepath)
-       (merge m)
+  (->> m
+       (merge (load-properties-file filepath) )
        (write-properties-file filepath)))
 
 (comment
