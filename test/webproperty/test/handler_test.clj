@@ -1,20 +1,19 @@
 (ns webproperty.test.handler-test
-  (:use clojure.test
-        ring.mock.request
+  (:use ring.mock.request
         webproperty.handler)
   (:require [midje.sweet :refer :all]
             [webproperty.properties :as properties]
             [webproperty.config :as config]))
 
-(deftest test-app
-  (testing "main route"
-    (let [response (app (request :get "/"))]
-      (is (= (:status response) 200))
-      (is (= (:body response) "An API to manipulate properties files."))))
+(facts "Default routes"
+  (app (request :get "/"))        => {:status 200
+                                      :headers {"Content-Type" "text/html; charset=utf-8"}
+                                      :body "An API to manipulate properties files."}
 
-  (testing "not-found route"
-    (let [response (app (request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+  (app (request :get "/invalid")) => {:status 404
+                                      :headers {"Content-Type" "text/html; charset=utf-8"}
+                                      :body "Not Found"})
+
 (fact (app (request :get "/properties/:name"))       => {:status 200
                                                          :headers {"Content-Type" "application/json"}
                                                          :body "{\"1\":\"2\"}"}
