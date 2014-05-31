@@ -19,7 +19,7 @@
        properties/load-properties-file))
 
 (defroutes app-routes
-  (GET "/" [] "An API to manipulate properties file.")
+  (GET "/" [] "An API to manipulate properties files.")
 
   (GET "/properties/:filename" [filename]
        (->> filename

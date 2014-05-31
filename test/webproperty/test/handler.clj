@@ -7,7 +7,7 @@
   (testing "main route"
     (let [response (app (request :get "/"))]
       (is (= (:status response) 200))
-      (is (= (:body response) "an API to manipulate properties file."))))
+      (is (= (:body response) "An API to manipulate properties files."))))
 
   (testing "not-found route"
     (let [response (app (request :get "/invalid"))]
