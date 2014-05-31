@@ -6,9 +6,8 @@ This bootstrap configuration file can be overriden by a jvm property bootstrap-w
   (:require [webproperty.properties :refer [load-properties-file]]
             [environ.core :refer [env]]))
 
-;; Retrieve the folder that exposes the properties files
 (defn webproperty-properties-folder []
-  "Compute the configuration folder."
+  "Compute the configuration folder that exposes the properties files."
   (let [;; the default filepath to the bootstrap webproperty configuration file
         default-webproperty-filepath "/tmp/bootstrap-webproperty.properties"
         ;; Determine the path to the bootstrap webproperty configuration file
