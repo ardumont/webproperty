@@ -1,4 +1,4 @@
-(ns webproperty.test.handler
+(ns webproperty.test.handler-test
   (:use clojure.test
         ring.mock.request
         webproperty.handler)
